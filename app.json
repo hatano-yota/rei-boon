@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "RAY-BOON",
+    "slug": "ray-boon",
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./assets/ray-boon-icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/ray-boon-splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "versionCode": 22,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/ray-boon-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.rayboon",
+      "softwareKeyboardLayoutMode": "pan",
+      "permissions": [
+        "INTERNET",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/ray-boon-icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "80fd6548-5936-4bae-a54c-9446e27502ce"
+      }
+    }
+  }
+}
