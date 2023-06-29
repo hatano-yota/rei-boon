@@ -1,5 +1,6 @@
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { FC, useEffect, useState } from 'react';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { useSetRecoilState } from 'recoil';
 import StackParamList from '../../../StackParamList';
 import { FlashCardsDataState, FlashCardsDef, WordDef } from '../../../atom/FlashCardsDataState';
@@ -37,7 +38,7 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
     setData((prev) =>
       prev.map((item) =>
         item.id === word_list.id
-          ? { ...item, status: item.status === 'weak' ? 'no-mark' : 'weak' }
+          ? { ...item, status: item.status === 'weak' ? 'normal' : 'weak' }
           : item,
       ),
     );
@@ -47,7 +48,7 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
     setData((prev) =>
       prev.map((item) =>
         item.id === word_list.id
-          ? { ...item, status: item.status === 'completed' ? 'no-mark' : 'completed' }
+          ? { ...item, status: item.status === 'completed' ? 'normal' : 'completed' }
           : item,
       ),
     );
@@ -63,6 +64,14 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
     return unsubscribe;
   }, [navigation]);
 
+  const openIconDescription = (desc: string) => {
+    Toast.show({
+      text1: desc,
+      type: desc === 'おぼえた！' ? 'success' : 'error',
+      visibilityTime: 1000,
+    });
+  };
+
   return (
     <SlidePre
       handleGoBack={handleGoBack}
@@ -73,6 +82,7 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
       handleFlip={handleFlip}
       handlePressSadIcon={handlePressSadIcon}
       handlePressHappyIcon={handlePressHappyIcon}
+      openIconDescription={openIconDescription}
     />
   );
 };

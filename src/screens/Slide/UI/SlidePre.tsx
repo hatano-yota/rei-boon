@@ -13,7 +13,7 @@ interface SlidePreProps {
   handleFlip: () => void;
   handlePressSadIcon: (word_list: WordDef) => void;
   handlePressHappyIcon: (word_list: WordDef) => void;
-  // openIconDescription: (desc: string) => void;
+  openIconDescription: (desc: string) => void;
 }
 
 const headerColor = '#79BC6E';
@@ -27,7 +27,7 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
     handleFlip,
     handlePressSadIcon,
     handlePressHappyIcon,
-    // openIconDescription,
+    openIconDescription,
   } = props;
 
   return (
@@ -61,7 +61,7 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
           <View style={styles.faceIconsContainer}>
             <TouchableOpacity
               onPress={() => handlePressSadIcon(word_list[page])}
-              // onLongPress={() => openIconDescription('にがて')}
+              onLongPress={() => openIconDescription('にがて')}
             >
               <Ionicons
                 name="sad-outline"
@@ -71,7 +71,7 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => handlePressHappyIcon(word_list[page])}
-              // onLongPress={() => openIconDescription('おぼえた！')}
+              onLongPress={() => openIconDescription('おぼえた！')}
               style={styles.marginLeft}
             >
               <Ionicons

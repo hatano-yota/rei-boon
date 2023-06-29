@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 
-export type WordStatus = 'completed' | 'weak' | 'no-mark';
+export type WordStatus = 'completed' | 'weak' | 'normal';
 export interface FlashCardsDef {
   id: number;
   name: string;
@@ -28,7 +28,7 @@ export const FlashCardsDataState = atom<FlashCardsDef[]>({
           lang: '英語',
           mean: 'こんにちは',
           example: '',
-          status: 'no-mark',
+          status: 'normal',
         },
       ],
     },
@@ -69,6 +69,6 @@ export const getWordObj = (prev: WordDef[]): WordDef => {
     lang: '',
     mean: '',
     example: '',
-    status: 'no-mark',
+    status: 'normal',
   };
 };
