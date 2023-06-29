@@ -1,4 +1,5 @@
 import { NavigationProp, RouteProp } from '@react-navigation/native';
+import * as Speech from 'expo-speech';
 import { FC, useEffect, useState } from 'react';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { useSetRecoilState } from 'recoil';
@@ -18,6 +19,7 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
   const [data, setData] = useState(route.params.data);
   const [page, setPage] = useState(0);
   const [isFront, setIsFront] = useState(true);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const pageTotal = data.length;
 
   const handleGoBack = () => {
@@ -32,6 +34,15 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
 
   const handleFlip = () => {
     setIsFront(!isFront);
+  };
+
+  const handlePressSpeaker = (example: string) => {
+    Speech.speak(example, {
+      rate: 1.0,
+      pitch: 1.0,
+      onStart: () => setIsSpeaking(true),
+      onDone: () => setIsSpeaking(false),
+    });
   };
 
   const handlePressSadIcon = (word_list: WordDef) => {
@@ -80,6 +91,8 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
       handlePageChange={handlePageChange}
       isFront={isFront}
       handleFlip={handleFlip}
+      isSpeaking={isSpeaking}
+      handlePressSpeaker={handlePressSpeaker}
       handlePressSadIcon={handlePressSadIcon}
       handlePressHappyIcon={handlePressHappyIcon}
       openIconDescription={openIconDescription}

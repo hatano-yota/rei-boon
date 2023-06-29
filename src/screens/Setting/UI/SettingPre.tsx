@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 interface SettingPreProps {
   isEditMode: boolean;
@@ -56,7 +56,7 @@ export const SettingPre: FC<SettingPreProps> = ({
             <Text style={styles.apiKey}>
               {apiKey.length > 7
                 ? `${apiKey.substring(0, 3)}...${apiKey.substring(apiKey.length - 4)}`
-                : apiKey || "未設定"}
+                : apiKey || '未設定'}
             </Text>
           </View>
           <TouchableOpacity onPress={handleClickToggleEditModeButton} style={styles.button}>
@@ -66,12 +66,12 @@ export const SettingPre: FC<SettingPreProps> = ({
       )}
       <View style={styles.textView}>
         <TouchableOpacity
-          onPress={() => handleLinkPress("https://ray-boon-api.vercel.app/how-to-setting")}
+          onPress={() => handleLinkPress('https://ray-boon-api.vercel.app/how-to-setting')}
         >
           <Text style={styles.link}>APIキーの取得方法</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => handleLinkPress("https://ray-boon-api.vercel.app/PrivacyPolicy")}
+          onPress={() => handleLinkPress('https://ray-boon-api.vercel.app/PrivacyPolicy')}
         >
           <Text style={styles.link}>プライバシーポリシー</Text>
         </TouchableOpacity>
@@ -83,14 +83,14 @@ export const SettingPre: FC<SettingPreProps> = ({
 const styles = StyleSheet.create({
   allView: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     marginTop: 30,
   },
   row: {
-    width: "80%",
-    flexDirection: "row",
-    alignItems: "center",
+    width: '80%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   rowHeight: {
     height: 40,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 16,
     borderWidth: 1,
-    borderColor: "grey",
+    borderColor: 'grey',
     borderRadius: 5,
   },
   label: {
@@ -110,41 +110,41 @@ const styles = StyleSheet.create({
     fontSize: 16,
     flex: 1,
     marginLeft: 4,
-    color: "gray",
+    color: 'gray',
   },
   textView: {
-    alignSelf: "flex-end",
+    alignSelf: 'flex-end',
     marginRight: 20,
   },
   button: {
-    backgroundColor: "#5FA1DE",
+    backgroundColor: '#5FA1DE',
     height: 40,
-    width: "80%",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 5,
     marginVertical: 30,
   },
   saveButton: {
-    width: "49%",
-    marginLeft: "2%",
+    width: '49%',
+    marginLeft: '2%',
   },
   cancelButton: {
-    backgroundColor: "white",
-    width: "49%",
+    backgroundColor: 'white',
+    width: '49%',
     borderWidth: 1,
-    borderColor: "lightgray",
+    borderColor: 'lightgray',
   },
   buttonText: {
-    color: "white",
+    color: 'white',
   },
   cancelButtonText: {
-    color: "#5FA1DE",
+    color: '#5FA1DE',
   },
   link: {
     padding: 10,
-    color: "#06C3FF",
-    textDecorationLine: "underline",
-    textAlign: "right",
+    color: '#06C3FF',
+    textDecorationLine: 'underline',
+    textAlign: 'right',
   },
 });

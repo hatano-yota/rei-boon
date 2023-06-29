@@ -11,6 +11,8 @@ interface SlidePreProps {
   handlePageChange: (page: number) => void;
   isFront: boolean;
   handleFlip: () => void;
+  isSpeaking: boolean;
+  handlePressSpeaker: (example: string) => void;
   handlePressSadIcon: (word_list: WordDef) => void;
   handlePressHappyIcon: (word_list: WordDef) => void;
   openIconDescription: (desc: string) => void;
@@ -21,10 +23,12 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
   const {
     page,
     word_list,
-    isFront,
     handleGoBack,
     handlePageChange,
+    isFront,
     handleFlip,
+    isSpeaking,
+    handlePressSpeaker,
     handlePressSadIcon,
     handlePressHappyIcon,
     openIconDescription,
@@ -58,6 +62,16 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
               </View>
             </ScrollView>
           )}
+          <TouchableOpacity
+            onPress={() => handlePressSpeaker(word_list[page].example)}
+            style={styles.speakerContainer}
+          >
+            <Ionicons
+              name="volume-medium-outline"
+              size={32}
+              style={isSpeaking ? styles.green : styles.lightGray}
+            />
+          </TouchableOpacity>
           <View style={styles.faceIconsContainer}>
             <TouchableOpacity
               onPress={() => handlePressSadIcon(word_list[page])}
@@ -66,7 +80,7 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
               <Ionicons
                 name="sad-outline"
                 size={28}
-                style={word_list[page].status === 'weak' ? styles.sadIcon : styles.faceIcon}
+                style={word_list[page].status === 'weak' ? styles.blue : styles.lightGray}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -77,7 +91,7 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
               <Ionicons
                 name="happy-outline"
                 size={28}
-                style={word_list[page].status === 'completed' ? styles.happyIcon : styles.faceIcon}
+                style={word_list[page].status === 'completed' ? styles.orange : styles.lightGray}
               />
             </TouchableOpacity>
           </View>
@@ -163,6 +177,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'baseline',
   },
+  speakerContainer: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    paddingBottom: 8,
+    paddingHorizontal: 12,
+  },
   faceIconsContainer: {
     flexDirection: 'row',
     position: 'absolute',
@@ -171,14 +193,17 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     paddingHorizontal: 12,
   },
-  faceIcon: {
+  lightGray: {
     color: 'lightgray',
   },
-  sadIcon: {
-    color: 'blue',
+  blue: {
+    color: '#659AD2',
   },
-  happyIcon: {
-    color: 'orange',
+  orange: {
+    color: '#ED9E31',
+  },
+  green: {
+    color: headerColor,
   },
   marginTop: {
     marginTop: 4,
