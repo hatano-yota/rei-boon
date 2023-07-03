@@ -39,7 +39,7 @@ export const FlashCardsCreateCon: FC = () => {
             lang: '',
             mean: '',
             example: '',
-            status: 'normal',
+            status: 'learning',
           },
         ],
       },

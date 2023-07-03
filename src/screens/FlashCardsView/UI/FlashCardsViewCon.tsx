@@ -44,7 +44,7 @@ export const FlashCardsViewCon: FC<FlashCardsListConProps> = (props) => {
         lang: '',
         mean: '',
         example: '',
-        status: 'normal',
+        status: 'learning',
       },
     ]);
   };

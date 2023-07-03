@@ -2,7 +2,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 import * as Speech from 'expo-speech';
 import { FC, useEffect, useState } from 'react';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import StackParamList from '../../../StackParamList';
 import { FlashCardsDataState, FlashCardsDef, WordDef } from '../../../atom/FlashCardsDataState';
 import { SlidePre } from './SlidePre';
@@ -15,7 +15,7 @@ interface SlideConProps {
 }
 
 export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
-  const setCardsData = useSetRecoilState<FlashCardsDef[]>(FlashCardsDataState);
+  const [cardsData, setCardsData] = useRecoilState<FlashCardsDef[]>(FlashCardsDataState);
   const [data, setData] = useState(route.params.data);
   const [page, setPage] = useState(0);
   const [isFront, setIsFront] = useState(true);
@@ -50,7 +50,7 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
     setData((prev) =>
       prev.map((item) =>
         item.id === word_list.id
-          ? { ...item, status: item.status === 'weak' ? 'normal' : 'weak' }
+          ? { ...item, status: item.status === 'unfamiliar' ? 'learning' : 'unfamiliar' }
           : item,
       ),
     );
@@ -60,7 +60,7 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
     setData((prev) =>
       prev.map((item) =>
         item.id === word_list.id
-          ? { ...item, status: item.status === 'completed' ? 'normal' : 'completed' }
+          ? { ...item, status: item.status === 'mastered' ? 'learning' : 'mastered' }
           : item,
       ),
     );
@@ -68,11 +68,15 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
+      // 戻るボタンで戻った場合に発火しない
       setCardsData((prev) =>
-        // TODO: 変更が保存されない、本当はidで比較したい(titleは重複の可能性あり)
+        // 変更が上手く保存されない
+        // 本当はidで比較したい
         prev.map((item) => (item.name === route.params.title ? { ...item, words: data } : item)),
       );
+      console.log('mammmami-ya');
     });
+    console.log(cardsData[0]);
     return unsubscribe;
   }, [navigation]);
 

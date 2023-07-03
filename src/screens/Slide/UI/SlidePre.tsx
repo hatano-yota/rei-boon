@@ -81,7 +81,7 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
                 <Ionicons
                   name="sad-outline"
                   size={28}
-                  style={word_list[page].status === 'weak' ? styles.blue : styles.lightGray}
+                  style={word_list[page].status === 'unfamiliar' ? styles.blue : styles.lightGray}
                 />
               </TouchableOpacity>
               <TouchableOpacity
@@ -92,7 +92,7 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
                 <Ionicons
                   name="happy-outline"
                   size={28}
-                  style={word_list[page].status === 'completed' ? styles.orange : styles.lightGray}
+                  style={word_list[page].status === 'mastered' ? styles.orange : styles.lightGray}
                 />
               </TouchableOpacity>
             </View>
