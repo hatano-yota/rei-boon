@@ -29,6 +29,7 @@ export const SlideCon: FC<SlideConProps> = ({ navigation, route }) => {
   const handlePageChange = (page: number) => {
     if (page >= 0 && page <= pageTotal - 1) {
       setPage(page);
+      setIsFront(true);
     }
   };
 

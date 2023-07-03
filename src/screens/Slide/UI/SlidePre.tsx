@@ -2,6 +2,7 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { FC } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { WordDef } from '../../../atom/FlashCardsDataState';
+import { PanGesture } from './Components/PanGesture';
 import { SlideButton } from './Components/SlideButton';
 
 interface SlidePreProps {
@@ -43,60 +44,61 @@ export const SlidePre: FC<SlidePreProps> = (props) => {
           <Text style={styles.headline_text}>意味・例文</Text>
         )}
       </View>
-
-      <View style={styles.slide}>
-        <View style={styles.content}>
-          {/* 表なら単語、裏なら意味・例文 */}
-          {isFront ? (
-            <Text style={styles.content_text}>{word_list[page].name}</Text>
-          ) : (
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.scrollContainer}
+      <PanGesture page={page} handlePageChange={handlePageChange}>
+        <View style={styles.slide}>
+          <TouchableOpacity onPress={() => handleFlip()} style={styles.content}>
+            {/* 表なら単語、裏なら意味・例文 */}
+            {isFront ? (
+              <Text style={styles.content_text}>{word_list[page].name}</Text>
+            ) : (
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.scrollContainer}
+              >
+                <View style={styles.scrollContent}>
+                  <Text style={styles.content_text}>意味: {word_list[page].mean}</Text>
+                  <Text style={[styles.content_text, styles.marginTop]}>
+                    例文: {word_list[page].example}
+                  </Text>
+                </View>
+              </ScrollView>
+            )}
+            <TouchableOpacity
+              onPress={() => handlePressSpeaker(word_list[page].example)}
+              style={styles.speakerContainer}
             >
-              <View style={styles.scrollContent}>
-                <Text style={styles.content_text}>意味: {word_list[page].mean}</Text>
-                <Text style={[styles.content_text, styles.marginTop]}>
-                  例文: {word_list[page].example}
-                </Text>
-              </View>
-            </ScrollView>
-          )}
-          <TouchableOpacity
-            onPress={() => handlePressSpeaker(word_list[page].example)}
-            style={styles.speakerContainer}
-          >
-            <Ionicons
-              name="volume-medium-outline"
-              size={32}
-              style={isSpeaking ? styles.green : styles.lightGray}
-            />
+              <Ionicons
+                name="volume-medium-outline"
+                size={32}
+                style={isSpeaking ? styles.green : styles.lightGray}
+              />
+            </TouchableOpacity>
+            <View style={styles.faceIconsContainer}>
+              <TouchableOpacity
+                onPress={() => handlePressSadIcon(word_list[page])}
+                onLongPress={() => openIconDescription('にがて')}
+              >
+                <Ionicons
+                  name="sad-outline"
+                  size={28}
+                  style={word_list[page].status === 'weak' ? styles.blue : styles.lightGray}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => handlePressHappyIcon(word_list[page])}
+                onLongPress={() => openIconDescription('おぼえた！')}
+                style={styles.marginLeft}
+              >
+                <Ionicons
+                  name="happy-outline"
+                  size={28}
+                  style={word_list[page].status === 'completed' ? styles.orange : styles.lightGray}
+                />
+              </TouchableOpacity>
+            </View>
           </TouchableOpacity>
-          <View style={styles.faceIconsContainer}>
-            <TouchableOpacity
-              onPress={() => handlePressSadIcon(word_list[page])}
-              onLongPress={() => openIconDescription('にがて')}
-            >
-              <Ionicons
-                name="sad-outline"
-                size={28}
-                style={word_list[page].status === 'weak' ? styles.blue : styles.lightGray}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => handlePressHappyIcon(word_list[page])}
-              onLongPress={() => openIconDescription('おぼえた！')}
-              style={styles.marginLeft}
-            >
-              <Ionicons
-                name="happy-outline"
-                size={28}
-                style={word_list[page].status === 'completed' ? styles.orange : styles.lightGray}
-              />
-            </TouchableOpacity>
-          </View>
         </View>
-      </View>
+      </PanGesture>
 
       <View style={styles.pagenation}>
         <View>

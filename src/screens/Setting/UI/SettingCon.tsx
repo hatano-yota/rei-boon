@@ -1,10 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import { FC, useEffect, useState } from "react";
-import { Linking } from "react-native";
-import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { useRecoilState } from "recoil";
-import { APIKeyState } from "../../../atom/APIKeyState";
-import { SettingPre } from "./SettingPre";
+import { useNavigation } from '@react-navigation/native';
+import { FC, useEffect, useState } from 'react';
+import { Linking } from 'react-native';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import { useRecoilState } from 'recoil';
+import { APIKeyState } from '../../../atom/APIKeyState';
+import { SettingPre } from './SettingPre';
 
 /**
  * 設定画面のロジック
@@ -26,8 +26,8 @@ export const SettingCon: FC = () => {
     setApiKey(inputValue);
     handleClickToggleEditModeButton();
     Toast.show({
-      text1: "変更を保存しました",
-      type: "success",
+      text1: '変更を保存しました',
+      type: 'success',
       visibilityTime: 2000,
     });
   };
@@ -36,7 +36,7 @@ export const SettingCon: FC = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
+    const unsubscribe = navigation.addListener('focus', () => {
       setIsEditMode(false);
     });
     return unsubscribe;
